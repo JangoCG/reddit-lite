@@ -1,6 +1,8 @@
 package com.jangocg.redditserver.rest.service;
 
 
+import com.jangocg.redditserver.rest.exception.UserAlreadyExistsException;
+import com.jangocg.redditserver.rest.exception.UserNotFoundException;
 import com.jangocg.redditserver.rest.model.User;
 import com.jangocg.redditserver.rest.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -17,28 +19,37 @@ public class UserService {
     UserRepository userRepository;
 
     /**
-     * Get a single user by id.
-     * @param id the id of the user.
+     * Get a single user by username.
+     *
+     * @param username last name of the the user.
      * @return found {@link User}
      */
-    public Optional<User> getById(UUID id) {
-        return userRepository.findById(id);
+    public User getByUsername(String username) {
+        return userRepository.findByUsername(username).orElseThrow(() -> new UserNotFoundException(username));
     }
 
     /**
      * Create a single user.
      *
-     * @param firstName
-     * @param lastName
+     * @param username
      * @param password
      * @return created user {@link User}
      */
-    public User createUser(String firstName, String lastName, String password) {
+    public User createUser(String username, String password) {
+
+        // check if user already exists
+        if (getByUsername(username) != null) {
+            throw new UserAlreadyExistsException(username);
+        }
+        // hash pw
         Argon2PasswordEncoder argon2 = new Argon2PasswordEncoder();
         String hashedPw = argon2.encode(password);
-        System.out.println("hashed pw" + hashedPw);
-        User user = User.builder().firstName(firstName).lastName(lastName).password(hashedPw).build();
+
+        User user = User.builder()
+                .username(username)
+                .password(hashedPw)
+                .build();
+
         return userRepository.save(user);
     }
-
 }

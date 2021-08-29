@@ -13,8 +13,8 @@ public interface UserRepository extends JpaRepository<User, UUID> {
     /**
      * Find a user by his last name.
      *
-     * @param lastName last name of the user
+     * @param username username of the user
      * @return Optional of the {@link User}
      */
-//    Optional<User> findByLastName(String name);
+    Optional<User> findByUsername(String username);
 }
