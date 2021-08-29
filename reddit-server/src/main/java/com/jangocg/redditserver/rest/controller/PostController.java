@@ -3,13 +3,8 @@ package com.jangocg.redditserver.rest.controller;
 import com.jangocg.redditserver.rest.model.Post;
 import com.jangocg.redditserver.rest.service.PostService;
 import lombok.AllArgsConstructor;
-import lombok.NonNull;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.SQLOutput;
 import java.util.Optional;
 
 @RestController
@@ -26,12 +21,10 @@ public class PostController {
      * @return found {@link Post}
      */
     @GetMapping
-    public Optional<Post> getPost(@RequestParam(name = "id", required = true) long id) {
-        System.out.println(id);
-//        ResponseEntity<String> response = new ResponseEntity<>("Hello World", HttpStatus.BAD_REQUEST);
-        return postService.getPost(id);
+    public Optional<Post> getPost(@RequestParam(name = "id", required=true) long id) {
+        //        ResponseEntity<String> response = new ResponseEntity<>("Hello World", HttpStatus.BAD_REQUEST);
+        System.out.println(id);return postService.getPost(id);
     }
-
 
     /**
      * Create a single post.
@@ -41,7 +34,6 @@ public class PostController {
      */
     @PostMapping
     public Post createPost(@RequestBody Post post) {
-
         System.out.println(post.getDescription());
         System.out.println(post.getTitle());
         return postService.createPost(post.getTitle(), post.getDescription());

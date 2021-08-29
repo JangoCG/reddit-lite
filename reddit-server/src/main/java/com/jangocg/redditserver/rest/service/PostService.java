@@ -3,8 +3,6 @@ package com.jangocg.redditserver.rest.service;
 import com.jangocg.redditserver.rest.model.Post;
 import com.jangocg.redditserver.rest.repository.PostRepository;
 import lombok.AllArgsConstructor;
-
-import lombok.extern.slf4j.XSlf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
