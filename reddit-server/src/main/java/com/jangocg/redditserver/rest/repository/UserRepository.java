@@ -4,6 +4,17 @@ import com.jangocg.redditserver.rest.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+import java.util.UUID;
+
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<User, UUID> {
+
+    /**
+     * Find a user by his last name.
+     *
+     * @param lastName last name of the user
+     * @return Optional of the {@link User}
+     */
+//    Optional<User> findByLastName(String name);
 }
