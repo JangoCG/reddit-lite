@@ -1,3 +1,3 @@
 # reddit-lite
 
-A Reddit clone created with Spring Boot and Angular.
+A full stack app created with Spring Boot, React, Next.js, Typescript, Mapstruct, PostgresSQL, Redis and Chakra.
