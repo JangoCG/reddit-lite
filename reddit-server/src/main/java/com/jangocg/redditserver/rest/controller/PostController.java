@@ -21,9 +21,10 @@ public class PostController {
      * @return found {@link Post}
      */
     @GetMapping
-    public Optional<Post> getPost(@RequestParam(name = "id", required=true) long id) {
+    public Optional<Post> getPost(@RequestParam(name = "id", required = true) long id) {
         //        ResponseEntity<String> response = new ResponseEntity<>("Hello World", HttpStatus.BAD_REQUEST);
-        System.out.println(id);return postService.getPost(id);
+        System.out.println(id);
+        return postService.getPost(id);
     }
 
     /**
