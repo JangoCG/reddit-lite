@@ -2,7 +2,6 @@ package com.jangocg.redditserver.rest.service;
 
 
 import com.jangocg.redditserver.rest.exception.UserAlreadyExistsException;
-import com.jangocg.redditserver.rest.exception.UserNotFoundException;
 import com.jangocg.redditserver.rest.model.User;
 import com.jangocg.redditserver.rest.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -10,7 +9,6 @@ import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
-import java.util.UUID;
 
 @Component
 @AllArgsConstructor
@@ -24,8 +22,8 @@ public class UserService {
      * @param username last name of the the user.
      * @return found {@link User}
      */
-    public User getByUsername(String username) {
-        return userRepository.findByUsername(username).orElseThrow(() -> new UserNotFoundException(username));
+    public Optional<User> getByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 
     /**
@@ -38,7 +36,7 @@ public class UserService {
     public User createUser(String username, String password) {
 
         // check if user already exists
-        if (getByUsername(username) != null) {
+        if (getByUsername(username).isPresent()) {
             throw new UserAlreadyExistsException(username);
         }
         // hash pw
