@@ -11,9 +11,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+// https://spring.io/guides/gs/rest-service-cors/
+// allows localhost cors request
+
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/v1/user")
+@CrossOrigin(origins = "http://localhost:8080")
 public class UserController {
 
     UserService userService;
