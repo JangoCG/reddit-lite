@@ -8,6 +8,7 @@ import {NbButtonModule, NbCardModule, NbInputModule, NbLayoutModule, NbThemeModu
 import {NbEvaIconsModule} from '@nebular/eva-icons';
 import {RegisterComponent} from './components/register/register.component';
 import {LoginComponent} from './components/login/login.component';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import {LoginComponent} from './components/login/login.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     NoopAnimationsModule,
     NbThemeModule.forRoot({name: 'dark'}),
